@@ -17,9 +17,9 @@
 import { Settings as LayoutSettings } from '@ant-design/pro-layout';
 
 export default {
-  navTheme: 'dark',
-  primaryColor: '#1890ff',
-  layout: 'mix',
+  navTheme: 'light',
+  primaryColor: '#f03d22',
+  layout: 'side',
   contentWidth: 'Fluid',
   fixedHeader: false,
   autoHideHeader: false,
@@ -28,11 +28,11 @@ export default {
   menu: {
     locale: true,
   },
-  title: 'APISIX Dashboard',
+  title: 'Viettel IDC',
   pwa: false,
   iconfontUrl: '',
   serveUrlMap: {
-    dev: 'http://139.217.190.60',
+    dev: 'http://0.0.0.0:9000',
     test: 'http://localhost:9000',
   },
 } as LayoutSettings & {

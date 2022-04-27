@@ -130,6 +130,10 @@ const routes = [
     layout: false,
   },
   {
+    path: '/testPage',
+    component: './TestPage',
+  },
+  {
     component: './404',
   },
 ];

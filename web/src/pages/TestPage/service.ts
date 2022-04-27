@@ -14,13 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import logo from '@/assets/favicon.png';
-
-export async function queryCurrent(): Promise<API.CurrentUser> {
-  return Promise.resolve({
-    name: 'Thành Nguyễn',
-    avatar: logo,
-    userid: '00000001',
-    access: 'admin',
+export const getGrafanaURL = (): Promise<string> =>
+  new Promise((resolve) => {
+    resolve(localStorage.getItem('GLOBAL_SETTING_GRAFANA_URL') || '');
   });
-}

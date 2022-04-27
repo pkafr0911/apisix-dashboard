@@ -20,12 +20,12 @@ import { DefaultFooter } from '@ant-design/pro-layout';
 
 export default () => (
   <DefaultFooter
-    copyright={`${new Date().getFullYear()} Apache APISIX`}
+    copyright={`${new Date().getFullYear()} Thành Nguyễn`}
     links={[
       {
         key: 'GitHub',
         title: <GithubOutlined />,
-        href: 'https://github.com/apache/apisix',
+        href: 'https://www.facebook.com/pkafr0911',
         blankTarget: true,
       },
     ]}
