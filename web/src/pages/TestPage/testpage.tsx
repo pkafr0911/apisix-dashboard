@@ -16,21 +16,74 @@
  */
 import React, { useState, useEffect } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Empty, Button, Card, Tooltip } from 'antd';
+import { Empty, Button, Card, Tooltip, Form, Input, Row, Col, notification } from 'antd';
+import ActionBar from '@/components/ActionBar';
+import { getUrlQuery } from '@/helpers';
 import { history, useIntl } from 'umi';
 
 import { getGrafanaURL } from './service';
+import { updateMonitorURL } from '../Setting/service';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
 const Dashboard: React.FC = () => {
   const [grafanaURL, setGrafanaURL] = useState<string | undefined>();
   const { formatMessage } = useIntl();
+  const [form] = Form.useForm();
+  const isSuperAdmin = true;
+  const isWorkspace = false;
+  const canFetchGrafana = (isSuperAdmin && !isWorkspace) || isWorkspace;
 
   useEffect(() => {
     getGrafanaURL().then((url) => {
       setGrafanaURL(url);
     });
-  }, []);
+    if (!canFetchGrafana) {
+      return;
+    }
+    getGrafanaURL().then((url) => {
+      form.setFieldsValue({
+        grafanaURL: url,
+      });
+    });
+  }, [canFetchGrafana]);
+
+  const onSubmit = () => {
+    form.validateFields().then((value) => {
+      Promise.all([
+        new Promise((resolve) => {
+          if (canFetchGrafana) {
+            updateMonitorURL(value.grafanaURL).then(resolve);
+          }
+          // resolve();
+        }),
+      ]).then(() => {
+        notification.success({
+          message: formatMessage({
+            id: 'page.setting.notification.update.configuration.successfully',
+          }),
+        });
+        setTimeout(() => {
+          const redirect = getUrlQuery('redirect');
+          const currentHost = window.location.host;
+          if (redirect) {
+            const redirectUrl = decodeURIComponent(redirect);
+            const pathArray = redirectUrl.split('/');
+            const redirectHost = pathArray[2];
+            if (currentHost === redirectHost) {
+              let path = '';
+              for (let i = 3; i < pathArray.length; i += 1) {
+                path += '/';
+                path += pathArray[i];
+              }
+              history.push(path);
+            }
+          } else {
+            history.push('/');
+          }
+        }, 500);
+      });
+    });
+  };
 
   return (
     <PageHeaderWrapper
@@ -43,6 +96,16 @@ const Dashboard: React.FC = () => {
         </>
       }
     >
+      <PageHeaderWrapper
+        title={
+          <>
+            {formatMessage({ id: 'menu.dashboard' })}&nbsp;
+            <Tooltip title={formatMessage({ id: 'page.dashboard.tip' })}>
+              <QuestionCircleOutlined />
+            </Tooltip>
+          </>
+        }
+      ></PageHeaderWrapper>
       <Card>
         {!grafanaURL && (
           <Empty
@@ -59,9 +122,7 @@ const Dashboard: React.FC = () => {
             <Button
               type="primary"
               onClick={() => {
-                history.replace({
-                  pathname: '/settings',
-                });
+                history.replace({});
               }}
             >
               {formatMessage({ id: 'page.dashboard.button.grafanaConfig' })}
@@ -74,6 +135,34 @@ const Dashboard: React.FC = () => {
           </div>
         )}
       </Card>
+      <Card>
+        <Row>
+          <Col span={10}>
+            <Form form={form} labelCol={{ span: 7 }}>
+              {canFetchGrafana && (
+                <Form.Item
+                  label={formatMessage({ id: 'PageURL' })}
+                  name="PageURL"
+                  extra={formatMessage({
+                    id: 'PageURL.inputHelpMessage',
+                  })}
+                  rules={[
+                    {
+                      pattern: new RegExp(/^https?:\/\//),
+                      message: formatMessage({
+                        id: 'page.setting.form.item.grafanaURL.inputErrorMessage',
+                      }),
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              )}
+            </Form>
+          </Col>
+        </Row>
+      </Card>
+      <ActionBar step={1} lastStep={1} onChange={onSubmit} />
     </PageHeaderWrapper>
   );
 };

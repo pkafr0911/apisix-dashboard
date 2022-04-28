@@ -42,6 +42,12 @@ context('Switch language', () => {
       force: true,
       timeout,
     });
+
+    cy.get(selector.languageSwitcher).click('right');
+    cy.contains('Vietnamese').click({
+      force: true,
+      timeout,
+    });
     cy.contains('Create').should('exist');
   });
 });

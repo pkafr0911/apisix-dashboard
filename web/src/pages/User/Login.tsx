@@ -103,9 +103,9 @@ const Page: React.FC = () => {
             </Link>
           </div>
           <div className={styles.desc}>
-            Apache APISIX Dashboard
-            <br />
             Cloud-Native Microservices API Gateway
+            <br />
+            Chuyển đổi số doanh nghiệp của bạn cùng các giải pháp sáng tạo, hiệu quả và thành công
           </div>
         </div>
         <div className={styles.main}>
