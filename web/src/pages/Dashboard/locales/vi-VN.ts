@@ -14,7 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { default } from './ActionBar';
-export { default as ActionBarZhCN } from './locales/zh-CN';
-export { default as ActionBarEnUS } from './locales/en-US';
-export { default as ActionBarViVN } from './locales/vi-VN';
+export default {
+  'page.dashboard.empty.description.grafanaNotConfig': 'bạn chưa cấu hình cho grafana',
+  'page.dashboard.button.grafanaConfig': 'Cấu hình',
+  'page.dashboard.tip':
+    'sử dụng trình duyệt để lưu trữ cục bộ cho máy theo URL của trang, chỉ cục bộ.',
+};

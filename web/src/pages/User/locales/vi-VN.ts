@@ -29,4 +29,6 @@ export default {
   'component.user.loginMethodPassword.changeDefaultAccount': 'How to update username/password?',
   'component.user.loginMethodPassword.modificationMethod':
     'Please modify the users field in the /api/conf/conf.yaml file',
+  'component.actionbar.button.preStep': 'Trở lại',
+  'component.actionbar.button.nextStep': 'Tiếp tục',
 };

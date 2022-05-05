@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { default } from './ActionBar';
-export { default as ActionBarZhCN } from './locales/zh-CN';
-export { default as ActionBarEnUS } from './locales/en-US';
-export { default as ActionBarViVN } from './locales/vi-VN';
+export default {
+  'component.actionbar.button.preStep': 'Trở lại',
+  'component.actionbar.button.nextStep': 'Tiếp tục',
+};
