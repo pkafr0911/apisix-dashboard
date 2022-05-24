@@ -74,9 +74,49 @@ export const getMenuData = (): MenuDataItem[] => {
       icon: <InfoCircleOutlined style={{ marginRight: 6 }} />,
     },
     {
-      name: 'TestPage',
+      name: 'Property manager editter',
       path: '/TestPage',
       icon: <IconFont name="iconbasic-auth" />,
+      routes: [
+        {
+          path: '/dashboard',
+          redirect: '/dashboard/analysis',
+        },
+        {
+          name: 'analysis',
+          icon: 'smile',
+          path: '/TestPage/',
+        },
+        {
+          name: 'monitor',
+          icon: 'smile',
+          path: '/dashboard/monitor',
+          component: './dashboard/monitor',
+          routes: [
+            {
+              path: '/dashboard',
+              redirect: '/dashboard/analysis',
+            },
+            {
+              name: 'a',
+              icon: 'smile',
+              path: '/TestPage2/',
+            },
+            {
+              name: 'b',
+              icon: 'smile',
+              path: '/dashboard/monitor',
+              component: './dashboard/monitor',
+            },
+          ],
+        },
+        {
+          name: 'workplace',
+          icon: 'smile',
+          path: '/dashboard/workplace',
+          component: './dashboard/workplace',
+        },
+      ],
     },
   ];
 };

@@ -134,6 +134,10 @@ const routes = [
     component: './TestPage',
   },
   {
+    path: '/testPage2',
+    component: './TestPage2',
+  },
+  {
     component: './404',
   },
 ];
