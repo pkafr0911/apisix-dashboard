@@ -140,6 +140,14 @@ const routes = [
   {
     component: './404',
   },
+  {
+    path: '/account/center',
+    component: './account/center',
+  },
+  {
+    path: '/account/settings',
+    component: './account/settings',
+  },
 ];
 
 export default routes;

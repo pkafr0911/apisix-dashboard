@@ -34,6 +34,29 @@ export const getMenuData = (): MenuDataItem[] => {
       icon: <IconFont name="icondashboard" />,
     },
     {
+      name: 'account',
+      icon: <IconFont name="icondashboard" />,
+      path: '/account',
+      routes: [
+        {
+          path: '/account',
+          redirect: '/account/center',
+        },
+        {
+          name: 'center',
+          icon: 'smile',
+          path: '/account/center',
+          component: './account/center',
+        },
+        {
+          name: 'Settings',
+          icon: 'smile',
+          path: '/account/settings',
+          component: './account/settings',
+        },
+      ],
+    },
+    {
       name: 'routes',
       path: '/routes/list',
       icon: <IconFont name="iconroute" />,
